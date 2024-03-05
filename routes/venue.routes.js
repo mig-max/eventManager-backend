@@ -41,8 +41,8 @@ router.get("/api/venues",  (req, res, next) => {
 // GET /api/venues/:venueId
 router.get("/api/venues/:venueId", (req, res, next) => {
     const { venueId } = req.params;
-    Venue.findById(id)
-    .populate("event")
+    Venue.findById(venueId)
+    // .populate("event")
     .then((venue) => {
         console.log(venue)
         res.status(200).json(venue)

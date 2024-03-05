@@ -46,7 +46,7 @@ router.get("/api/events/:eventId", (req, res, next) => {
 
 // PUT /api/events/:eventId
 
-router.get("/api/events/:eventId", isAuthenticated, (req, res, next) => {
+router.put("/api/events/:eventId", isAuthenticated, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndUpdate(eventId, req.body, { new: true })
@@ -60,7 +60,7 @@ router.get("/api/events/:eventId", isAuthenticated, (req, res, next) => {
 
 // DELETE /api/events/:eventId
 
-router.get("/api/events/:eventId", isAuthenticated, (req, res, next) => {
+router.delete("/api/events/:eventId", isAuthenticated, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndDelete(eventId)
