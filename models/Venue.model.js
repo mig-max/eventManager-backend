@@ -9,7 +9,7 @@ const venueSchema = new Schema({
     capacity: {type: Number},
     isFoodAvaiable: {type: Boolean, required: true},
     isDrinksAvaiable: {type: Boolean, required: true},
-    events: {
+    event: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Event"
     },

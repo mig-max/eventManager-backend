@@ -28,7 +28,7 @@ router.post("/api/venues", isAuthenticated, (req, res, next) => {
 
 router.get("/api/venues",  (req, res, next) => {
     Venue.find()
-    // .populate("event")
+    .populate("event")
     .then((venues) => {
         console.log(venues)
         res.status(200).json(venues)
@@ -42,7 +42,7 @@ router.get("/api/venues",  (req, res, next) => {
 router.get("/api/venues/:venueId", (req, res, next) => {
     const { venueId } = req.params;
     Venue.findById(venueId)
-    // .populate("event")
+    .populate("event")
     .then((venue) => {
         console.log(venue)
         res.status(200).json(venue)
