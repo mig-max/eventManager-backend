@@ -98,6 +98,16 @@ We will start our project by first documenting all of the routes and data models
   email: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   name: { type: String, required: true },
+  username: {
+      type: String,
+      required: [true, "Username is required."],
+      unique: true,
+    },
+    avatar: {
+      type: String,
+      default: "https://picsum.photos/seed/picsum/200/300",
+    },
+    about: {type: String }   
 }
 ```
 
