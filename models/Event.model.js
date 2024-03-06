@@ -6,12 +6,12 @@ const eventSchema = new Schema({
     eventType: { 
         type: [String],
         enum: [
-            "concert",
-            "exhibition",
-            "market",
-            "party",
-            "theatre",
-            "other",
+            "Concert",
+            "Exhibition",
+            "Market",
+            "Party",
+            "Theatre",
+            "Other",
         ],
         required: true,
     },
