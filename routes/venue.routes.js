@@ -7,9 +7,9 @@ const {isAuthenticated} = require("../middleware/jwt.middleware");
 
 // Venue Routes
 
-// POST/api/venues
+// POST/venues
 
-router.post("/api/venues", isAuthenticated, (req, res, next) => {
+router.post("/venues", isAuthenticated, (req, res, next) => {
 
     Venue.create(req.body)
     .then((createdVenue) => {
@@ -24,7 +24,7 @@ router.post("/api/venues", isAuthenticated, (req, res, next) => {
 });
 
 
-// GET /api/venues
+// GET /venues
 
 router.get("/venues",  (req, res, next) => {
     Venue.find()
@@ -38,8 +38,8 @@ router.get("/venues",  (req, res, next) => {
     });
 });
 
-// GET /api/venues/:venueId
-router.get("/api/venues/:venueId", (req, res, next) => {
+// GET /venues/:venueId
+router.get("/venues/:venueId", (req, res, next) => {
     const { venueId } = req.params;
     Venue.findById(venueId)
     .populate("event")
@@ -53,9 +53,9 @@ router.get("/api/venues/:venueId", (req, res, next) => {
 });
 
 
-// PUT /api/venues/:venueId
+// PUT /venues/:venueId
 
-router.put("/api/venues/:venueId", isAuthenticated, (req, res, next) => {
+router.put("/venues/:venueId", isAuthenticated, (req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndUpdate(venueId, req.body, {new: true})
     .then((updatedVenue) => {
@@ -67,8 +67,8 @@ router.put("/api/venues/:venueId", isAuthenticated, (req, res, next) => {
     });
 });
 
-// DELETE /api/venues/:venueId
-router.delete("/api/venues/:venueId", isAuthenticated, (req, res, next) => {
+// DELETE /venues/:venueId
+router.delete("/venues/:venueId", isAuthenticated, (req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndDelete(venueId)
     .then((deletedVenue) => {

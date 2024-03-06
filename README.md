@@ -7,25 +7,31 @@ We will start our project by first documenting all of the routes and data models
 
 ##### Event routes
 
-| HTTP verb | URL                        | Request body | Action                      |
-| --------- | -------------------------- | ------------ | ----------------------------|
-| GET       | `/api/events`              | (empty)      | Returns all the events      |
-| POST      | `/api/events`              | JSON         | Adds a new event            |
-| GET       | `/api/events/:eventId`     | (empty)      | Returns the specified event |
-| PUT       | `/api/events/:eventId`     | JSON         | Edits the specified event   |
-| DELETE    | `/api/events/:eventId`     | (empty)      | Deletes the specified evet  |
+| HTTP verb | URL                    | Request body | Action                      |
+| --------- | -----------------------| ------------ | ----------------------------|
+| GET       | `/events`              | (empty)      | Returns all the events      |
+| POST      | `/events`              | JSON         | Adds a new event            |
+| GET       | `/events/:eventId`     | (empty)      | Returns the specified event |
+| PUT       | `/events/:eventId`     | JSON         | Edits the specified event   |
+| DELETE    | `/events/:eventId`     | (empty)      | Deletes the specified evet  |
 
 ##### Venue routes
 
-| HTTP verb | URL                    | Request body | Action                      |
-| --------- | -----------------------| ------------ | --------------------------- |
-| GET       | `/api/venues`          | (empty)      | Returns all the venues      |
-| POST      | `/api/venues`          | JSON         | Adds a new venue            |
-| GET       | `/api/venues/:venueId` | (empty)      | Returns the specified venue |
-| PUT       | `/api/venues/:venueId` | JSON         | Edits the specified venue   |
-| DELETE    | `/api/venues/:venueId` | (empty)      | Deletes the specified venue |
+| HTTP verb | URL                | Request body | Action                      |
+| --------- | -------------------| ------------ | --------------------------- |
+| GET       | `/venues`          | (empty)      | Returns all the venues      |
+| POST      | `/venues`          | JSON         | Adds a new venue            |
+| GET       | `/venues/:venueId` | (empty)      | Returns the specified venue |
+| PUT       | `/venues/:venueId` | JSON         | Edits the specified venue   |
+| DELETE    | `/venues/:venueId` | (empty)      | Deletes the specified venue |
 
+##### User routes
 
+| HTTP verb | URL             | Request body | Action                      |
+| --------- | ----------------| -------------| ----------------------------|
+| GET       | `/user/:userId` | (empty)      | Returns the specified user  |
+| PUT       | `/user/:userId` | JSON         | Edits the specified user    |
+| DELETE    | `/user/:userId` | (empty)      | Deletes the specified user  |
 
 ##### Auth routes
 
@@ -35,6 +41,7 @@ We will start our project by first documenting all of the routes and data models
 | POST      | `/auth/login`  | --                              | { email, password }       |
 | GET       | `/auth/verify` | Authorization: Bearer \< JWT \> | --                        |
 
+               |
 
 
 <hr>

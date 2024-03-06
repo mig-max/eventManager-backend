@@ -4,8 +4,8 @@ const router = express.Router();
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
-// POST /api/events
-router.post("/api/events", isAuthenticated, (req, res, next) => {
+// POST /events
+router.post("/events", isAuthenticated, (req, res, next) => {
     Event.create(req.body)
     .then((newEvent) => {
         res.status(201).json(newEvent);
@@ -15,9 +15,9 @@ router.post("/api/events", isAuthenticated, (req, res, next) => {
     });
 });
 
-// GET /api/events
+// GET /events
 
-router.get("/api/events", (req, res, next) => {
+router.get("/events", (req, res, next) => {
     Event.find({})
         .populate("venue")
         .then((events) => {
@@ -29,9 +29,9 @@ router.get("/api/events", (req, res, next) => {
         });
 });
 
-// GET /api/events/:eventId
+// GET /events/:eventId
 
-router.get("/api/events/:eventId", (req, res, next) => {
+router.get("/events/:eventId", (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findById(eventId)
@@ -44,9 +44,9 @@ router.get("/api/events/:eventId", (req, res, next) => {
         });
 });
 
-// PUT /api/events/:eventId
+// PUT /events/:eventId
 
-router.put("/api/events/:eventId", isAuthenticated, (req, res, next) => {
+router.put("/events/:eventId", isAuthenticated, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndUpdate(eventId, req.body, { new: true })
@@ -58,9 +58,9 @@ router.put("/api/events/:eventId", isAuthenticated, (req, res, next) => {
         });
 });
 
-// DELETE /api/events/:eventId
+// DELETE /events/:eventId
 
-router.delete("/api/events/:eventId", isAuthenticated, (req, res, next) => {
+router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndDelete(eventId)
