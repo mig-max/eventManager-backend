@@ -18,6 +18,18 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Name is required."],
     },
+    username: {
+      type: String,
+      required: [true, "Username is required."],
+      unique: true,
+    },
+    avatar: {
+      type: String,
+      default: "https://picsum.photos/seed/picsum/200/300",
+    },
+    about: {
+      type: String,
+    }
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

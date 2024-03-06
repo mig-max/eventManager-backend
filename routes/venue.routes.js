@@ -26,7 +26,7 @@ router.post("/api/venues", isAuthenticated, (req, res, next) => {
 
 // GET /api/venues
 
-router.get("/api/venues",  (req, res, next) => {
+router.get("/venues",  (req, res, next) => {
     Venue.find()
     .populate("event")
     .then((venues) => {
