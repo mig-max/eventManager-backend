@@ -7,8 +7,8 @@ const venueSchema = new Schema({
         type: String, 
         enum: ["Outdoor", "Indoor", "Other"], required: true},
     capacity: {type: Number},
-    isFoodAvaiable: {type: Boolean, required: true},
-    isDrinksAvaiable: {type: Boolean, required: true},
+    isFoodAvaiable: {type: Boolean},
+    isDrinksAvaiable: {type: Boolean},
     event: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Event"
