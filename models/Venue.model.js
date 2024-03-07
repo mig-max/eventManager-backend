@@ -5,7 +5,7 @@ const venueSchema = new Schema({
     name: {type: String, required: true, unique: true},
     venueType: {
         type: String, 
-        enum: ["outdoor", "indoor", "other"], required: true},
+        enum: ["Outdoor", "Indoor", "Other"], required: true},
     capacity: {type: Number},
     isFoodAvaiable: {type: Boolean, required: true},
     isDrinksAvaiable: {type: Boolean, required: true},
