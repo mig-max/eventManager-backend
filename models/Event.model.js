@@ -15,6 +15,10 @@ const eventSchema = new Schema({
         ],
         required: true,
     },
+    imageUrl: {
+        type: String,
+        default: "https://picsum.photos/seed/picsum/200/300",
+    },
     description: { type: String, required: true },
     time: { type: Date, required: true, default: Date.now },
     isEighteen: { type: Boolean},
