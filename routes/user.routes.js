@@ -6,8 +6,7 @@ const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 // GET /users/:userId - Get user by id
 router.get("/users/:userId", isAuthenticated, (req, res, next) => {
-    const { userId } = req.params;
-    User.findById(userId)
+    User.findById({_id: req.params.userId})
         .then((user) => {
             res.json(user);
         })
