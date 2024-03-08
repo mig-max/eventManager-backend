@@ -18,6 +18,8 @@ const eventSchema = new Schema({
     description: { type: String, required: true },
     time: { type: Date, required: true, default: Date.now },
     isEighteen: { type: Boolean},
+    isFree: { type: Boolean},
+    price: { type: Number}, 
     venue: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Venue",
