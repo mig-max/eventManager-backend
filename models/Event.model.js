@@ -28,6 +28,10 @@ const eventSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Venue",
     },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "User"
+    }
 });
 
 const Event = mongoose.model("Event", eventSchema);
