@@ -3,6 +3,7 @@ const router = express.Router();
 
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
+const { isEventOwner} = require("../middleware/isOwner.js");
 
 // POST /events
 router.post("/events", isAuthenticated, (req, res, next) => {
@@ -46,7 +47,7 @@ router.get("/events/:eventId", (req, res, next) => {
 
 // PUT /events/:eventId
 
-router.put("/events/:eventId", isAuthenticated, (req, res, next) => {
+router.put("/events/:eventId", isAuthenticated, isEventOwner, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndUpdate(eventId, req.body, { new: true })
@@ -60,7 +61,7 @@ router.put("/events/:eventId", isAuthenticated, (req, res, next) => {
 
 // DELETE /events/:eventId
 
-router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
+router.delete("/events/:eventId", isAuthenticated, isEventOwner, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndDelete(eventId)
