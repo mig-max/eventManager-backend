@@ -45,9 +45,9 @@ router.get("/events/:eventId", (req, res, next) => {
         });
 });
 
-// PUT /events/:eventId
+// PUT /events/:eventId // ADD: isEventOwner,
 
-router.put("/events/:eventId", isAuthenticated, isEventOwner, (req, res, next) => {
+router.put("/events/:eventId", isAuthenticated,  (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndUpdate(eventId, req.body, { new: true })
@@ -59,9 +59,9 @@ router.put("/events/:eventId", isAuthenticated, isEventOwner, (req, res, next) =
         });
 });
 
-// DELETE /events/:eventId
+// DELETE /events/:eventId // ADD: isEventOwner,
 
-router.delete("/events/:eventId", isAuthenticated, isEventOwner, (req, res, next) => {
+router.delete("/events/:eventId", isAuthenticated,  (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndDelete(eventId)
