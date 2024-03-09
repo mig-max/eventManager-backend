@@ -5,8 +5,8 @@ const User = require("../models/User.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 // GET /users/:userId - Get user by id
-router.get("/users/:userId", isAuthenticated, (req, res, next) => {
-    User.findById({_id: req.params.userId})
+router.get("/users/:id", isAuthenticated, (req, res, next) => {
+    User.findById(req.params.userId)
         .then((user) => {
             res.json(user);
         })
@@ -16,7 +16,7 @@ router.get("/users/:userId", isAuthenticated, (req, res, next) => {
 });
 
 // PUT /users/:userId - Update user by id
-router.put("/users/:userId", isAuthenticated, (req, res, next) => {
+router.put("/users/:id", isAuthenticated, (req, res, next) => {
     const { userId } = req.params;
     User.findByIdAndUpdate(userId, req.body, { new: true })
         .then((updatedUser) => {
@@ -28,7 +28,7 @@ router.put("/users/:userId", isAuthenticated, (req, res, next) => {
 });
 
 // DELETE /users/:userId - Delete user by id
-router.delete("/users/:userId", isAuthenticated, (req, res, next) => {
+router.delete("/users/:id", isAuthenticated, (req, res, next) => {
     const { userId } = req.params;
     User.findByIdAndDelete(userId)
         .then((deletedUser) => {
