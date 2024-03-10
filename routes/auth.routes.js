@@ -65,8 +65,20 @@ router.post("/signup", (req, res, next) => {
       // We should never expose passwords publicly
       const { email, name, _id } = createdUser;
 
-      // Create a new object that doesn't expose the password
-      const user = { email, name, _id };
+      // Create a new object that doesn't expose the password 
+
+      //const user = { email, name, _id }; //////
+
+      const user = {
+        _id ,
+        email,
+        password,
+        name,
+        username,
+        avatar,
+        about
+      };
+  
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });
