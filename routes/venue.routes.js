@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const Venue = require("../models/Venue.model");
 const {isAuthenticated} = require("../middleware/jwt.middleware");
-const { isVenueOwner} = require("../middleware/isOwner.js");
+const { isOwner} = require("../middleware/isOwner.js");
 
 // POST/venues
 
@@ -51,7 +51,7 @@ router.get("/venues/:venueId", (req, res, next) => {
 });
 
 
-// PUT /venues/:venueId // ADD: isVenueOwner, 
+// PUT /venues/:venueId // ADD: isOwner, 
 
 router.put("/venues/:venueId", isAuthenticated, (req, res, next) => {
     const { venueId } = req.params;
@@ -65,7 +65,7 @@ router.put("/venues/:venueId", isAuthenticated, (req, res, next) => {
     });
 });
 
-// DELETE /venues/:venueId // ADD: isVenueOwner,
+// DELETE /venues/:venueId // ADD: isOwner,
 router.delete("/venues/:venueId", isAuthenticated,  (req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndDelete(venueId)

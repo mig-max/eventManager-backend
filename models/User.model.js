@@ -28,6 +28,7 @@ const userSchema = new Schema(
     },
     about: {
       type: String,
+      default: "I am using EventSlap.",
     }
   },
   {

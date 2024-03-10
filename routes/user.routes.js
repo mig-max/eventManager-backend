@@ -4,11 +4,23 @@ const router = express.Router();
 const User = require("../models/User.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
-// GET /users/:userId - Get user by id
+// GET /users/:id - Get user by id
 router.get("/users/:id", isAuthenticated, (req, res, next) => {
-    User.findById(req.params.userId)
+    const { id } = req.params;
+    User.findById(id)
         .then((user) => {
-            res.json(user);
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+            res.json({
+                _id: user._id,
+                email: user.email,
+                name: user.name,
+                username: user.username,
+                avatar: user.avatar,
+                about: user.about,
+                
+            });
         })
         .catch((error) => {
             next(error);

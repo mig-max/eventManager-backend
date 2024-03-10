@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Event = require("../models/Event.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
-const { isEventOwner} = require("../middleware/isOwner.js");
+const { isOwner } = require("../middleware/isOwner");
 
 // POST /events
 router.post("/events", isAuthenticated, (req, res, next) => {
@@ -45,7 +45,7 @@ router.get("/events/:eventId", (req, res, next) => {
         });
 });
 
-// PUT /events/:eventId // ADD: isEventOwner,
+// PUT /events/:eventId // ADD: isOwner,
 
 router.put("/events/:eventId", isAuthenticated,  (req, res, next) => {
     const { eventId } = req.params;
@@ -59,9 +59,9 @@ router.put("/events/:eventId", isAuthenticated,  (req, res, next) => {
         });
 });
 
-// DELETE /events/:eventId // ADD: isEventOwner,
+// DELETE /events/:eventId // ADD: isOwner,
 
-router.delete("/events/:eventId", isAuthenticated,  (req, res, next) => {
+router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndDelete(eventId)
@@ -88,17 +88,20 @@ router.get('/date/:date', async (req, res) => {
 
 
 // GET /events/free
-router.get("/events", (req, res, next) => {
-    Event.find({ isFree: true }) // Filter events where isFree is true
-        .populate("venue")
-        .then((freeEvents) => {
-            console.log("Retrieved free events ->", freeEvents); // Log the free events data to the server console
-            res.status(200).json(freeEvents); // Send the free events data as JSON response
-        })
-        .catch((error) => {
-            next(error);
-        });
+router.get('/date/:date', async (req, res) => {
+    try {
+        const date = new Date(req.params.date);
+        // Find events whose time field matches the given date
+        const events = await Event.find({ time: { $gte: date, $lt: new Date(date.getTime() + 24 * 60 * 60 * 1000) } }); // This will find events for the given date
+
+        res.json(events);
+    } catch (error) {
+        console.error('Error fetching events for date:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
+
+
 
 
   
