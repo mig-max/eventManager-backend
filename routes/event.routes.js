@@ -73,5 +73,17 @@ router.delete("/events/:eventId", isAuthenticated,  (req, res, next) => {
         });
 });
 
+// Route to get events for a specific date
+router.get('/date/:date', async (req, res) => {
+    try {
+      const date = new Date(req.params.date);
+      const events = await Event.find({ date: date.toISOString() });
+      res.json(events);
+    } catch (error) {
+      console.error('Error fetching events for date:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+  
 
 module.exports = router;
