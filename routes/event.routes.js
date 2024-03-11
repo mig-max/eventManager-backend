@@ -7,6 +7,11 @@ const { isOwner } = require("../middleware/isOwner");
 
 // POST /events
 router.post("/events", isAuthenticated, (req, res, next) => {
+   
+    const userId = req.payload._id;
+    req.body.author = userId;  // Attach the current user id to the event body
+    console.log("Author:", userId);
+
     Event.create(req.body)
     .then((newEvent) => {
         res.status(201).json(newEvent);

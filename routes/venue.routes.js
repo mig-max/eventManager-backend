@@ -9,6 +9,10 @@ const { isOwner} = require("../middleware/isOwner.js");
 
 router.post("/venues", isAuthenticated, (req, res, next) => {
 
+    const userId = req.payload._id;
+    req.body.author = userId;  // Attach the current user id to the venue body
+    console.log("Author:", userId);
+
     Venue.create(req.body)
     .then((createdVenue) => {
         console.log(createdVenue)
@@ -17,7 +21,6 @@ router.post("/venues", isAuthenticated, (req, res, next) => {
     .catch((error) => {
         next(error)
     });
-
 });
 
 
