@@ -12,7 +12,6 @@ router.post("/venues", isAuthenticated, (req, res, next) => {
     Venue.create(req.body)
     .then((createdVenue) => {
         console.log(createdVenue)
-        // Sending back the created venue
         res.status(201).json(createdVenue)
     })
     .catch((error) => {
@@ -27,6 +26,7 @@ router.post("/venues", isAuthenticated, (req, res, next) => {
 router.get("/venues",  (req, res, next) => {
     Venue.find()
     .populate("event")
+    .populate("author")
     .then((venues) => {
         console.log(venues)
         res.status(200).json(venues)
@@ -41,6 +41,7 @@ router.get("/venues/:venueId", (req, res, next) => {
     const { venueId } = req.params;
     Venue.findById(venueId)
     .populate("event")
+    .populate("author")
     .then((venue) => {
         console.log(venue)
         res.status(200).json(venue)

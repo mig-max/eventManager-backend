@@ -21,7 +21,7 @@ const venueSchema = new Schema({
         type: String, 
         required: true
     },
-    createdBy: {
+    author: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "User"
     }

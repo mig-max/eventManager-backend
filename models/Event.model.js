@@ -20,7 +20,7 @@ const eventSchema = new Schema({
         default: "https://picsum.photos/seed/picsum/200/300",
     },
     description: { type: String, required: true },
-    time: { type: Date, required: true, default: Date.now },
+    date: { type: Date, required: true, default: Date.now },
     isEighteen: { type: Boolean},
     isFree: { type: Boolean},
     price: { type: Number}, 
@@ -28,7 +28,7 @@ const eventSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Venue",
     },
-    createdBy: {
+    author: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "User"
     }

@@ -21,6 +21,7 @@ router.post("/events", isAuthenticated, (req, res, next) => {
 router.get("/events", (req, res, next) => {
     Event.find({})
         .populate("venue")
+        .populate("author")
         .then((events) => {
             console.log("Retrieved events ->", events);
             res.json(events);
@@ -37,6 +38,7 @@ router.get("/events/:eventId", (req, res, next) => {
 
     Event.findById(eventId)
         .populate("venue")
+        .populate("author")
         .then((event) => {
             res.status(200).json(event);
         })
@@ -73,21 +75,23 @@ router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
         });
 });
 
-// Route to get events for a specific date
-// GET /events/date/:date
-router.get('/date/:date', async (req, res) => {
-    try {
-      const date = new Date(req.params.date);
-      const events = await Event.find({ date: date.toISOString() });
-      res.json(events);
-    } catch (error) {
-      console.error('Error fetching events for date:', error);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
 
 
 // GET /events/free
+router.get('/free', async (req, res) => {
+    try {
+        // Find events where isFree is true
+        const events = await Event.find({ isFree: true });
+
+        res.json(events);
+    } catch (error) {
+        console.error('Error fetching free events:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+// Route to get events for a specific date
+///GET /events/date/:date
 router.get('/date/:date', async (req, res) => {
     try {
         const date = new Date(req.params.date);
@@ -102,8 +106,5 @@ router.get('/date/:date', async (req, res) => {
 });
 
 
-
-
-  
 
 module.exports = router;
