@@ -57,7 +57,7 @@ router.get("/venues/:venueId", (req, res, next) => {
 
 // PUT /venues/:venueId // ADD: isOwner, 
 
-router.put("/venues/:venueId", isAuthenticated, (req, res, next) => {
+router.put("/venues/:venueId", isAuthenticated, isOwner,(req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndUpdate(venueId, req.body, {new: true})
     .then((updatedVenue) => {
@@ -70,7 +70,7 @@ router.put("/venues/:venueId", isAuthenticated, (req, res, next) => {
 });
 
 // DELETE /venues/:venueId // ADD: isOwner,
-router.delete("/venues/:venueId", isAuthenticated,  (req, res, next) => {
+router.delete("/venues/:venueId", isAuthenticated, isOwner, (req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndDelete(venueId)
     .then((deletedVenue) => {

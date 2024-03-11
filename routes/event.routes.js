@@ -54,7 +54,7 @@ router.get("/events/:eventId", (req, res, next) => {
 
 // PUT /events/:eventId // ADD: isOwner,
 
-router.put("/events/:eventId", isAuthenticated,  (req, res, next) => {
+router.put("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
     const { eventId } = req.params;
 
     Event.findByIdAndUpdate(eventId, req.body, { new: true })
@@ -68,8 +68,15 @@ router.put("/events/:eventId", isAuthenticated,  (req, res, next) => {
 
 // DELETE /events/:eventId // ADD: isOwner,
 
-router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
+router.delete("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
     const { eventId } = req.params;
+
+    const userId = req.payload._id;
+    req.body.author = userId;  // Attach the current user id to the event body
+    
+    console.log("Author:", userId);
+    console.log("Event ID to delete:", eventId);
+    
 
     Event.findByIdAndDelete(eventId)
         .then(() => {
@@ -81,9 +88,8 @@ router.delete("/events/:eventId", isAuthenticated, (req, res, next) => {
 });
 
 
-
 // GET /events/free
-router.get('/free', async (req, res) => {
+router.get('/events/free', async (req, res) => {
     try {
         // Find events where isFree is true
         const events = await Event.find({ isFree: true });
@@ -97,15 +103,19 @@ router.get('/free', async (req, res) => {
 
 // Route to get events for a specific date
 ///GET /events/date/:date
-router.get('/date/:date', async (req, res) => {
+router.get('/events/date/:date', async (req, res) => {
     try {
         const date = new Date(req.params.date);
+        console.log(req.params.date);
         // Find events whose time field matches the given date
-        const events = await Event.find({ time: { $gte: date, $lt: new Date(date.getTime() + 24 * 60 * 60 * 1000) } }); // This will find events for the given date
+       // const events = await Event.find({ date: { $gte: date, $lt: new Date(date.getTime() + 24 * 60 * 60 * 1000) } }); // This will find events for the given date
+
+       const events = await Event.find({date:req.params.date})
+       console.log("event:", events)
 
         res.json(events);
     } catch (error) {
-        console.error('Error fetching events for date:', error);
+        console.log('Error fetching events for date:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
