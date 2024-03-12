@@ -17,7 +17,7 @@ const eventSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        default: "https://picsum.photos/seed/picsum/200/300",
+        default: "https://www.format.com/wp-content/uploads/celebrate-event-photography.jpg",
     },
     description: { type: String, required: true },
     date: { type: Date, required: true, default: Date.now },

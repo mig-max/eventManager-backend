@@ -15,7 +15,7 @@ const venueSchema = new Schema({
     },
     imageUrl: {
         type: String,
-        default: "https://picsum.photos/seed/picsum/200/300",
+        default: "https://memo.thevendry.com/wp-content/uploads/2022/06/iStock-13447299461.jpg",
     },
     address: {
         type: String, 

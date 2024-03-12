@@ -24,7 +24,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      default: "https://picsum.photos/seed/picsum/200/300",
+      default: "https://variety.com/wp-content/uploads/2021/04/Avatar.jpg?w=800&h=533&crop=1",
     },
     about: {
       type: String,
