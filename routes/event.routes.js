@@ -120,6 +120,23 @@ router.get('/events/date/:date', async (req, res) => {
     }
 });
 
-
+// GET /users/events/:userid
+router.get("/users/events/:userId", isAuthenticated, async (req, res, next) => {
+    try {
+      const { userId } = req.params;
+      if (userId !== req.payload._id) {
+        return res.status(403).json({ error: "Unauthorized to access events" });
+      }
+  
+      const events = await Event.find({ author: userId })
+        .populate("venue")
+        .select("title description date eventType imageUrl"); 
+  
+      res.json(events);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
 
 module.exports = router;
