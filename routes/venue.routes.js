@@ -10,7 +10,7 @@ const { isOwner} = require("../middleware/isOwner.js");
 router.post("/venues", isAuthenticated, (req, res, next) => {
 
     const userId = req.payload._id;
-    req.body.author = userId;  // Attach the current user id to the venue body
+    req.body.author = userId;  
     console.log("Author:", userId);
 
     Venue.create(req.body)
@@ -55,7 +55,7 @@ router.get("/venues/:venueId", (req, res, next) => {
 });
 
 
-// PUT /venues/:venueId // ADD: isOwner, 
+// PUT /venues/:venueId 
 
 router.put("/venues/:venueId", isAuthenticated, isOwner,(req, res, next) => {
     const { venueId } = req.params;
@@ -69,13 +69,13 @@ router.put("/venues/:venueId", isAuthenticated, isOwner,(req, res, next) => {
     });
 });
 
-// DELETE /venues/:venueId // ADD: isOwner,
+// DELETE /venues/:venueId 
 router.delete("/venues/:venueId", isAuthenticated, isOwner, (req, res, next) => {
     const { venueId } = req.params;
     Venue.findByIdAndDelete(venueId)
     .then((deletedVenue) => {
         console.log(deletedVenue)
-        res.status(200).json(deletedVenue)
+        res.status(204).json(deletedVenue)
     })
     .catch((error) => {
         next(error)

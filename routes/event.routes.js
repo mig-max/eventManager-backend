@@ -9,7 +9,7 @@ const { isOwner } = require("../middleware/isOwner");
 router.post("/events", isAuthenticated, (req, res, next) => {
    
     const userId = req.payload._id;
-    req.body.author = userId;  // Attach the current user id to the event body
+    req.body.author = userId; 
     console.log("Author:", userId);
 
     Event.create(req.body)
@@ -52,8 +52,7 @@ router.get("/events/:eventId", (req, res, next) => {
         });
 });
 
-// PUT /events/:eventId // ADD: isOwner,
-
+// PUT /events/:eventId 
 router.put("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
     const { eventId } = req.params;
 
@@ -66,13 +65,13 @@ router.put("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
         });
 });
 
-// DELETE /events/:eventId // ADD: isOwner,
+// DELETE /events/:eventId 
 
 router.delete("/events/:eventId", isAuthenticated, isOwner, (req, res, next) => {
+   
     const { eventId } = req.params;
-
     const userId = req.payload._id;
-    req.body.author = userId;  // Attach the current user id to the event body
+    req.body.author = userId;  
     
     console.log("Author:", userId);
     console.log("Event ID to delete:", eventId);
