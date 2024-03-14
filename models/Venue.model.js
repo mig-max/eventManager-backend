@@ -21,6 +21,12 @@ const venueSchema = new Schema({
         type: String, 
         required: true
     },
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "User"
