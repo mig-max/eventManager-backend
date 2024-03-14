@@ -171,8 +171,7 @@ Add the following environment variables in `.env` files:
 ##### Venue Model
 
 ```js
-{
-    name: {type: String, required: true, unique: true},
+name: {type: String, required: true, unique: true},
     venueType: {
         type: String, 
         enum: ["Outdoor", "Indoor", "Other"], required: true},
@@ -191,12 +190,16 @@ Add the following environment variables in `.env` files:
         type: String, 
         required: true
     },
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
+    },
     author: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: "User"
     }
-
-}
 ```
 
 ##### User Model
