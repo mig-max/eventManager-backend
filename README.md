@@ -58,7 +58,7 @@ Add the following environment variables in `.env` files:
 - `VITE_APP_URL=http://localhost:5005`
 
 
-### Case 2: Creating your own deployment
+### Creating your own deployment
 
 #### Backend using adaptable.io
 
