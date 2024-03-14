@@ -1,25 +1,41 @@
 # EventSlap (Backend Server)
 
-- Deployed live version: [Live demo](https://eventslap.netlify.app)
+This is the Eventslap backend (express API) repo.
+
+- Backend live server: [Backend live server](https://event-management-api.adaptable.app)
 
 ## Description
-Eventslap is a full-stack web application based on the MERN stack.
+
+Eventslap is Full-stack application using the MERN stack (MongoDB, Express, React, and Node.JS)
 This repository contains the backend code for the server of this application. It is a RESTful API built with ExpressJS, MongoDB, and Mongoose.
 
 It allows logged-in users to manage all the events and venues that they own in the database doing full CRUD. Anonymous users can see venues, events and free events,
 and also doing search by name or date. Logged-in users can create new venues and events, and view all existing ones.
 
+## Technical Requirements
+
+- REST API backend built with ExpressJS, MongoDB, and Mongoose.
+- REST API backend with routes that perform all CRUD actions for two models (excluding the user model).
+- Backend validation and centralized error handling the REST API.
+
+- SPA frontend, built with React, consisting of multiple views and implementing all CRUD actions.
+- Include sign-up, log-in, and log-out functionality with encrypted passwords and authorization (logged-in users can do additional things).
+
 ## Frontend
-- Frontend client  repo: [Frontend Client Repo](https://github.com/mig-max/eventManager-frontend)
+
+- Deployed live version: [Live demo](https://eventslap.netlify.app)
+
+- Frontend client repo: [Frontend Client Repo](https://github.com/mig-max/eventManager-frontend)
 
 ## Instructions
 To run on your computer, follow these steps:
 1. Clone the repository.
 2. Install dependencies: `npm install`.
 3. Create a `.env` file with the following environment variables:
-   - `ORIGIN`: with the location of your frontend app (example, `ORIGIN=https://yourapp.netlify.com`).
-   - `TOKEN_SECRET`: used to sign auth tokens (example, `TOKEN_SECRET=ilovepizza`).
-4. Run the application: `npm run dev`.
+    - `PORT=<your-port>` (5005)
+    - `ORIGIN=http:/http://localhost:5173/`
+    - `TOKEN_SECRET=<your-token-secret>`
+4. Run the application: `node server.js`.
 
 
 ## Environment variables
@@ -55,7 +71,9 @@ Add the following environment variables in `.env` files:
 - `CLOUDINARY_SECRET = add-your-cloudinary-secret`
 
 #### Fronted using netlify.app
+
 - `CI=false` (required for SPA applications deployed on this service to redirect requests to index.html)
+
 - `VITE_API_URL=<your-adaptable-app-domain>`
 
 - `CLOUDINARY_NAME = add-your-cloudinary-name`
@@ -106,9 +124,9 @@ Add the following environment variables in `.env` files:
 | HTTP verb | URL            | Request Headers                 | Request Body                   |
 | --------- | -------------- | ------------------------------- | -------------------------------|
 | POST      | `/api/upload`  | JSON                            | Route that receives the image, |
-                                                               | sends it to Cloudinary via the |
-                                                               | fileUploader and returns the   |
-                                                               | image URL                      |
+|                            |                                 | sends it to Cloudinary via the |
+|                            |                                 | fileUploader and returns the   |
+|                            |                                 | image URL                      |
 <hr>
 
 #### Models
