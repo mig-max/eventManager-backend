@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const fileUploader = require("../config/cloudinary.config"); //
+const fileUploader = require("../config/cloudinary.config"); 
 
 
 router.get("/", (req, res, next) => {
@@ -8,7 +8,7 @@ router.get("/", (req, res, next) => {
 });
 
 /////////////////////
-// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+// POST "/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
 router.post("/upload", fileUploader.single("fileUrl"), (req, res, next) => {
   console.log("file is: ", req.file)
   if (!req.file) {
